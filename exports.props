@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros">
+    <LunaSVGRoot Condition="'$(LunaSVGRoot)' == ''">$(MSBuildThisFileDirectory)</LunaSVGRoot>
+  </PropertyGroup>
+  
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(LunaSVGRoot)include;$(LunaSVGRoot)source;$(LunaSVGRoot)plutovg\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LUNASVG_BUILD_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(LunaSVGRoot)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lunasvg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <ItemDefinitionGroup Condition="'$(Platform)' == 'Win32'">
+    <Link>
+      <AdditionalLibraryDirectories>$(LunaSVGRoot)x86\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <ItemDefinitionGroup Condition="'$(Platform)' == 'x64'">
+    <Link>
+      <AdditionalLibraryDirectories>$(LunaSVGRoot)x64\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="$(LunaSVGRoot)lunasvg.vcxproj">
+      <Project>{B2C3D4E5-F6A7-8901-BCDE-F23456789012}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(LunaSVGRoot)plutovg\plutovg.vcxproj">
+      <Project>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</Project>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemGroup>
+  
+</Project>
